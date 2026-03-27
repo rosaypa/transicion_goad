@@ -1,0 +1,473 @@
+---
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+    css: styles.css
+    smooth-scroll: true
+    code-fold: false
+    toc-location: left
+    title-block: false
+page-layout: full
+lang: es
+---
+
+::: {.cover}
+::: {.cover-topbar}
+:::
+
+::: {.cover-content}
+
+![](logo.png){width=600px}
+
+::: {.cover-title}
+Documento de Transición
+:::
+
+::: {.cover-subtitle-main}
+Gerencia Operativa de Análisis de Datos
+:::
+
+::: {.cover-divider}
+:::
+
+::: {.cover-subtitle}
+Subsecretaría de Gestión de Recursos Humanos
+:::
+
+::: {.cover-meta}
+Gobierno de la Ciudad de Buenos Aires  
+2026
+:::
+
+:::
+:::
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+## Propósito del documento
+
+El presente documento tiene como objetivo asegurar la continuidad operativa del área y orientar su evolución hacia un modelo de analítica avanzada, planificación estratégica y soporte a la toma de decisiones de alto nivel.
+
+
+## Rol del área
+
+El área tiene como función principal:
+
+- Desarrollar y mantener tableros de información estratégica en materia de RRHH  
+- Brindar soporte analítico a la toma de decisiones  
+- Consolidar y validar fuentes de datos críticas  
+- Evolucionar hacia modelos predictivos y sistemas de alerta
+  
+
+::: {.callout-note}
+Actualmente el área opera como soporte transversal de datos para la SSGRH, con creciente demanda por parte de gabinete y de las áreas sustantivas.
+:::
+
+## Estado actual del ecosistema
+
+### Productos principales
+
+- Dotaciones
+  - Dotaciones
+  - Rotación
+  - Discapacidad
+  - Seguimiento PEP
+  - Estructura
+  - Planeamiento de dotaciones
+- Ausentismo y Licencias
+  - Licencias Médicas
+  - Ausentismo
+  - Autoseguro  
+- Salarios
+  - Salarios
+  - Presupuesto
+- Presencialidad
+  - Registro Digital de Asistencia
+  - Control de presentismo
+- Indicadores  
+
+## Arquitectura del área
+
+El área se estructura como un sistema integrado de datos, indicadores y tableros, orientado a transformar información operativa en insumos para la toma de decisiones estratégicas.
+
+### Arquitectura funcional del área
+
+::: {.mermaid-large}
+```{mermaid}
+%%{init: {
+  "flowchart": {"useMaxWidth": true},
+  "themeVariables": {"fontSize": "18px"}
+}}%%
+
+flowchart LR
+
+  U[Usuario] --> I[Índice / Interfaz]
+
+  I --> T[Tableros]
+  I --> IND[Indicadores]
+
+  DWH[Data Warehouse / SIAL] --> D[Datos y procesamiento]
+  D --> IND
+  D --> T
+
+  IND --> T
+  T --> DEC[Toma de decisiones]
+```
+:::
+
+---
+
+### Arquitectura de repositorios
+
+El área opera bajo una arquitectura modular basada en repositorios especializados, que permite escalar desarrollos, asegurar trazabilidad y sostener múltiples productos en paralelo.
+
+El ecosistema del área se organiza en capas funcionales, permitiendo separar la gestión de datos, la analítica y la visualización. Esta estructura facilita la escalabilidad, el mantenimiento y la continuidad operativa.
+
+#### Capa de datos y procesamiento
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/DataWarehouse" target="_blank">DataWarehouse</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/pre_dotaciones_2" target="_blank">pre_dotaciones_2</a>
+
+</div>
+
+Esta capa concentra la lógica de integración, transformación y consolidación de datos, constituyendo la base estructural de los desarrollos del área.
+
+::: {.callout-tip}
+El repositorio `pre_dotaciones_2` funciona como base estructural para múltiples tableros.
+:::
+
+::: {.callout-note}
+Hay una idea de conformación de una base estructural para `licencias` (como `pre_licencias`).
+:::
+
+#### Capa analítica y de control
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/indicadores_tablero" target="_blank">indicadores_tablero</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/indicadores" target="_blank">indicadores</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/control_indicadores" target="_blank">control_indicadores</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/alertas_indicadores" target="_blank">alertas_indicadores</a>
+
+</div>
+
+Incluye desarrollos orientados al monitoreo, generación de indicadores y evolución hacia modelos de alertas y analítica avanzada.
+
+#### Capa de visualización y tableros
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/dotaciones" target="_blank">dotaciones</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/licencias" target="_blank">licencias</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/ausentismo" target="_blank">ausentismo</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/presupuesto" target="_blank">presupuesto</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/salarios" target="_blank">salarios</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/estructura_dotaciones" target="_blank">estructuras</a>
+
+<a class="repo-btn" href="https://github.com/Datos-SSGRH/monitoreo_biometricos" target="_blank">biométricos</a>
+
+</div>
+
+Esta capa agrupa los productos orientados al usuario final, incluyendo tableros operativos y herramientas de seguimiento.
+
+#### Navegación y experiencia de usuario
+
+<div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px;">
+
+<a class="repo-btn repo-data" href="https://github.com/Datos-SSGRH/interfaz" target="_blank">interfaz (nuevo índice)</a>
+
+</div>
+
+Esta línea de trabajo busca consolidar un punto de acceso unificado a los tableros del área, mejorando la experiencia de usuario y la navegación entre productos.
+
+
+::: {.callout-tip}
+Como criterio de gestión, se recomienda diferenciar entre repositorios estructurales, productos consolidados y desarrollos en evolución, priorizando aquellos con impacto directo en la toma de decisiones.
+:::
+
+---
+
+### Modelo tecnológico
+
+- R + Shiny (principal)
+- JavaScript (visualizaciones y lógica frontend)
+- Python (ETL y DataWarehouse)
+- HTML (reportes)
+- Integraciones con bases internas (SIAL, etc.)
+
+## Desafíos prioritarios de gestión
+
+::: {.callout-warning}
+Estos desafíos tienen impacto directo en la gestión política y requieren priorización.
+:::
+
+### Consolidación de productos
+
+#### Salarios
+- Estado: parcialmente completo
+- Tablero: Salarios
+- Resta modelo consolidado de análisis de paritarias e inflaciones provinciales
+- Link issue GitHub: [Paritarias - IPC (jurisdicciones)](https://github.com/Datos-SSGRH/presupuesto/issues/9)
+- Alto impacto en toma de decisiones
+
+#### Presupuesto
+- Estado: parcialmente completo
+- Tablero: Presupuesto
+- Resta integrar ejercicio 2026 (info solicitada a DGPLYCO)
+- Relevancia creciente para gabinete y áreas sustantivas
+- Proyecto de inclusión en el análisis al inciso 3 (LOYS)
+
+#### Planeamiento de dotaciones (POF)
+- Estado: en desarrollo
+- Tablero: Planeamiento de dotaciones
+- Actualmente descriptivo
+- Link issue GitHub: [Tablero integral Planeamiento de Dotaciones](https://github.com/Datos-SSGRH/dotaciones/issues/23)
+- Necesidad de integrar con nuevo módulo de SIAL de planeamiento de dotaciones (consultar tablas a Ale S.)
+
+#### Ejecución de UREs
+- Estado: en desarrollo
+- Tabelero: Estructura
+- Actualmente no existe una sección de tablero específica para el seguimiento de ejecución de UREs, aunque se cuenta con datos consolidados en drive de DGALH.
+- Link issue GitHub: [Pestaña URE](https://github.com/Datos-SSGRH/estructura_dotaciones/issues/5)
+- Necesidad de integrar con nuevo módulo de SIAL de Unidades Retributivas Extraordinarias (ya se consultaron tablas a Ale S., pero eventualmente se pueden confirmar con el equipo de SIAL)
+
+### Escalar tableros de Presencialidad y Control biométrico
+
+#### Presencialidad
+- Escalar modelo actual (Lezama → todo GCBA)
+- Estructura propuesta:
+  - Resumen
+  - Convocatoria
+  - Ocupación
+  - Fichadas (cumplimiento 4x1)
+- Link wireframe Figma: [Presencialidad](https://www.figma.com/design/SVTcFv03bWhYXibJ4hVoO5/Presencialidad?node-id=0-1&t=Ln1mUTopMAeKVQ3r-0)
+
+#### Control biométrico
+- Escalar modelo actual (docentes → todo GCBA)
+- Evolución esperada:
+  - Resumen mapa
+  - Gráficos evolutivos de instalación y uso de equipos
+  - Detalle de infraestructura de control biométrico
+  - Detalle de enrolamiento de agentes
+  - Detalle de uso de equipos (fichadas)
+- Link wireframe Figma: [Registro Digital de Asistencia](https://www.figma.com/design/hesYxP1s79Di79V8lYYOdG/Registro-Digital-de-Asistencia?node-id=4015-746&t=p3Opxxh7VIXgimZC-0)
+
+### Reporte con IA del Sistema de indicadores
+
+- Generación automática de insights  
+- Detección de desvíos  
+- Alertas tempranas
+- Necesidad de integrar con lectura de indicadores y tableros y, eventualmente, con modelos predictivos
+- Link issue GitHub: [Alertas](https://github.com/Datos-SSGRH/alertas_indicadores/issues/2)
+- Link drive estructura completa de indicadores SSGRH: [Estructura completa de indicadores SSGRH](https://docs.google.com/spreadsheets/d/1zx2raGra3_dXEqzMHGng8-F41W56KN5LzlYmCrm1Gak/edit?gid=0#gid=0)
+
+::: {.callout-note}
+Existen antecedentes en repositorios como `alertas_indicadores`.
+:::
+
+## Proyectos estratégicos
+
+::: {.callout-important}
+Estos proyectos pudieran precisar una expansión en la capacidad operativa del área.
+:::
+
+### Gestión estrategica de RRHH
+
+#### Balanced Scorecard institucional
+
+- El modelo organiza la estrategia en cuatro perspectivas interdependientes, cada una con objetivos específicos y métricas asociadas que permiten una gestión integral del capital humano.
+- Dimensiones del Marco Estratégico de la SSGRH:
+  - Eficiencia del Gasto en Personal
+  - Sustentabilidad de la Dotación
+  - Modernización y Procesos
+  - Estándar de Servicio al Empleado
+- Link presentación explicativa: [Balanced Scorecard](https://gamma.app/docs/Balanced-Scorecard-SSGRH-y5dywgy4hzm9aeo?mode=doc)
+- Link drive con detalle de indicadores Marco Estratégico: [Marco Estratégico SSGRH](https://docs.google.com/spreadsheets/d/1jRtu4C-MRseCCyU1GOYzPxD1N6ZFiOv9/edit?gid=1719972556#gid=1719972556)
+- Link drive descripción del proyecto: [Estructura Balanced Scorecard](https://docs.google.com/spreadsheets/d/1mIv5u1aAzDUe3_klngE3Ocb4Xa6CVY3JMEkaI2Zme3Y/edit?gid=700727062#gid=700727062)
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-width: 9
+#| fig-height: 7
+#| fig-align: center
+
+library(ggplot2)
+library(dplyr)
+
+bsc <- data.frame(
+  dimension = c(
+    "Eficiencia del\nGasto en Personal",
+    "Sustentabilidad\nde la Dotación",
+    "Modernización\ny Procesos",
+    "Estándar de Servicio\nal Empleado"
+  ),
+  value = c(4.0, 3.4, 3.0, 3.2)
+)
+
+n <- nrow(bsc)
+
+bsc_plot <- bsc %>%
+  mutate(
+    angle = seq(0, 2*pi, length.out = n + 1)[1:n],
+    x = value * sin(angle),
+    y = value * cos(angle)
+  )
+
+bsc_poly <- bind_rows(bsc_plot, bsc_plot[1, ])
+
+axes <- data.frame(
+  dimension = bsc$dimension,
+  angle = seq(0, 2*pi, length.out = n + 1)[1:n],
+  xend = 5 * sin(seq(0, 2*pi, length.out = n + 1)[1:n]),
+  yend = 5 * cos(seq(0, 2*pi, length.out = n + 1)[1:n])
+)
+
+rings <- lapply(1:5, function(r) {
+  data.frame(
+    r = r,
+    angle = seq(0, 2*pi, length.out = 200),
+    x = r * sin(seq(0, 2*pi, length.out = 200)),
+    y = r * cos(seq(0, 2*pi, length.out = 200))
+  )
+}) %>% bind_rows()
+
+# Etiquetas dimensiones
+labels <- axes %>%
+  mutate(
+    xlab = 6.2 * sin(angle),
+    ylab = 6.2 * cos(angle)
+  )
+
+# Escala radial 0-100%
+scale_labels <- data.frame(
+  x = 0,
+  y = 1:5,
+  label = c("20%", "40%", "60%", "80%", "100%")
+)
+
+ggplot() +
+  geom_path(
+    data = rings,
+    aes(x = x, y = y, group = r),
+    color = "grey80",
+    linewidth = 0.4
+  ) +
+  geom_text(
+    data = scale_labels,
+    aes(x = x, y = y, label = label),
+    color = "grey50",
+    size = 3.5
+  ) +
+  geom_segment(
+    data = axes,
+    aes(x = 0, y = 0, xend = xend, yend = yend),
+    color = "grey75",
+    linewidth = 0.4
+  ) +
+  geom_polygon(
+    data = bsc_poly,
+    aes(x = x, y = y),
+    fill = "#8DE2D6",
+    alpha = 0.35,
+    color = "#153244",
+    linewidth = 1.2
+  ) +
+  geom_point(
+    data = bsc_plot,
+    aes(x = x, y = y),
+    color = "#153244",
+    size = 3.5
+  ) +
+  geom_text(
+    data = labels,
+    aes(x = xlab, y = ylab, label = dimension),
+    size = 5.2,
+    fontface = "bold",
+    color = "#153244"
+  ) +
+  coord_equal(
+    xlim = c(-6.8, 6.8),
+    ylim = c(-6.4, 6.8),
+    clip = "off"
+  ) +
+  theme_void() +
+  labs(title = "Balanced Scorecard Estratégico — SSGRH") +
+  theme(
+    plot.title = element_text(
+      size = 18,
+      face = "bold",
+      color = "#153244",
+      hjust = 0.5
+    ),
+    plot.margin = margin(25, 40, 25, 40)
+  )
+```
+
+*Figura — Balanced Scorecard estratégico de la Subsecretaría de Gestión de Recursos Humanos*
+
+### Analítica predictiva
+
+#### Predicción de rotación
+- Identificación de riesgo de salida
+- Insumo para políticas de retención o planificación de la contratación
+
+#### Dotación óptima
+- Definición de estructuras eficientes
+- Soporte a planificación presupuestaria
+
+## Lineamientos de evolución
+
+::: {.callout-tip}
+El área debe evolucionar en tres dimensiones clave:
+
+- De descriptivo → predictivo  
+- De tableros → sistema de decisión  
+- De respuesta a demanda → agenda estratégica  
+:::
+
+## Roadmap sugerido
+
+### 0–3 meses
+- Consolidación de tableros:
+  - Salarios
+  - Presupuesto (inc. 1)
+  - Ejecución de UREs
+- Definición de desarrollos para escalar tableros:
+  - Presentismo  
+  - Registro Digital de Asistencia  
+
+### 3–6 meses
+- Integración de tableros:
+  - Presupuesto (inc. 3 - SIGAF; acceso pendiente)
+  - Planeamiento de dotaciones  
+- Indicadores con IA  
+
+### 6–12 meses
+- Modelos predictivos  
+- Balanced Scorecard  
+
+## Recomendaciones de gestión
+
+- Priorizar productos con impacto político  
+- Evitar dispersión en pedidos ad hoc  
+- Consolidar fuentes de datos (DWH)
+- Fortalecer vínculo con áreas usuarias  
+
+::: {.callout-important}
+La sostenibilidad del área depende más de la priorización que de la capacidad técnica.
+:::
